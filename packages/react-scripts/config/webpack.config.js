@@ -166,6 +166,10 @@ module.exports = function(webpackEnv) {
       // require.resolve('webpack/hot/dev-server'),
       isEnvDevelopment &&
         require.resolve('react-dev-utils/webpackHotDevClient'),
+      // eumentis-cloud | start
+      // Setting for react-hot-loader
+      isEnvDevelopment && 'react-hot-loader/patch',
+      // eumentis-cloud | end
       // Finally, this is your app's code:
       paths.appIndexJs,
       // We include the app code last so that if there is a runtime error during
@@ -300,6 +304,10 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
+        // eumentis-cloud | start
+        // Setting for react-hot-loader
+        'react-dom': isEnvDevelopment ? '@hot-loader/react-dom' : 'react-dom',
+        // eumentis-cloud | end
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -424,6 +432,10 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  // eumentis-cloud | start
+                  // Setting for react-hot-loader
+                  ...(isEnvDevelopment ? ['react-hot-loader/babel'] : []),
+                  // eumentis-cloud | end
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -535,6 +547,14 @@ module.exports = function(webpackEnv) {
                 'sass-loader'
               ),
             },
+            // eumentis-cloud | start
+            // Graphql files
+            {
+              test: /\.(graphql|gql)$/,
+              exclude: /node_modules/,
+              loader: 'graphql-tag/loader'
+            },
+            // eumentis-cloud | end
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
             // In production, they would get copied to the `build` folder.
