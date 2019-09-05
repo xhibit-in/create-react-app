@@ -356,7 +356,11 @@ module.exports = function(webpackEnv) {
                   }
 
                   // We allow overriding the config only if the env variable is set
-                  if (process.env.EXTEND_ESLINT && eslintConfig) {
+                  // eumentis-cloud | start
+                  const extendEslint = process.env.EXTEND_ESLINT.toLowerCase();
+                  const isExtendEslintTrue = !!(extendEslint === 'true' || extendEslint === 'yes' || extendEslint === 'y' || extendEslint === '1')
+                  if (isExtendEslintTrue && eslintConfig) {
+                  // eumentis-cloud | end
                     return eslintConfig;
                   } else {
                     return {
