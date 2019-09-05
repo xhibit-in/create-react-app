@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "react-app",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "no-plusplus": "off",
+    "react/forbid-prop-types": "off",
+    "react/jsx-one-expression-per-line": "off"
+  }
+}
