@@ -99,12 +99,43 @@ module.exports = function(
     build: 'react-scripts build',
     test: 'react-scripts test',
     eject: 'react-scripts eject',
+    // eumentis-cloud | start
+    prettier: 'prettier --write "src/**/*.{js,css,json,md,jsx}"',
+    lint: 'eslint -c ./.eslintrc "src/**/*.{js,mjs,jsx,ts,tsx}"',
+    'lint:errors':
+      'eslint -c ./.eslintrc --quiet "src/**/*.{js,mjs,jsx,ts,tsx}"',
+    'lint-staged': 'lint-staged',
+    'git-cz': 'git-cz',
+    ecommit: 'run-s lint-staged git-cz'
+    // eumentis-cloud | end
   };
 
   // Setup the eslint config
   appPackage.eslintConfig = {
     extends: 'react-app',
   };
+
+  // eumentis-cloud | start
+  // Husky
+  appPackage.husky = {
+    hooks: {
+      'pre-commit': 'lint-staged',
+    },
+  };
+
+  // Lint Staged
+  appPackage['lint-staged'] = {
+    'src/**/*.{js,jsx,css,scss,json,md}': ['prettier --write', 'git add'],
+    'src/**/*.{js,mjs,jsx}': 'eslint -c ./.eslintrc',
+  };
+
+  // Commitizen Config
+  appPackage.config = {
+    commitizen: {
+      path: '@eumentis-cloud/cz-jira',
+    }
+  };
+  // eumentis-cloud | end
 
   // Setup the browsers list
   appPackage.browserslist = defaultBrowsers;
