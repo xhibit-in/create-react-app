@@ -230,6 +230,43 @@ module.exports = function(
     verifyTypeScriptSetup();
   }
 
+  // eumentis-cloud | start
+  // Dependencies
+  console.log('Installing dependencies...');
+  console.log();
+  const depProc = spawn.sync('yarn', ['add', 'prop-types', 'react-hot-loader'], { stdio: 'inherit' });
+  if (depProc.status !== 0) {
+    console.error('Installing dependencies failed');
+    return;
+  }
+
+  // Dev dependencies
+  console.log('Installing dev dependencies...');
+  console.log();
+  const devDepArgs = [
+    'add',
+    '-D',
+    'prettier',
+    'husky',
+    'lint-staged',
+    'eslint-config-airbnb',
+    'eslint-plugin-prettier',
+    'eslint-config-prettier',
+    '@hot-loader/react-dom',
+    'npm-run-all',
+    'commitizen',
+    '@eumentis-cloud/cz-jira',
+    'node-sass',
+    'graphql-tag',
+    'graphql'
+  ];
+  const devDepProc = spawn.sync('yarn', devDepArgs, { stdio: 'inherit' });
+  if (devDepProc.status !== 0) {
+    console.error('Installing dev dependencies failed');
+    return;
+  }
+  // eumentis-cloud | end
+
   if (tryGitInit(appPath)) {
     console.log();
     console.log('Initialized a git repository.');
