@@ -357,16 +357,26 @@ module.exports = function(webpackEnv) {
 
                   // We allow overriding the config only if the env variable is set
                   // eumentis-cloud | start
-                  const extendEslint = process.env.EXTEND_ESLINT.toLowerCase();
-                  const isExtendEslintTrue = !!(extendEslint === 'true' || extendEslint === 'yes' || extendEslint === 'y' || extendEslint === '1')
-                  if (isExtendEslintTrue && eslintConfig) {
-                  // eumentis-cloud | end
-                    return eslintConfig;
-                  } else {
+                  if (!eslintConfig) {
                     return {
                       extends: [require.resolve('eslint-config-react-app')],
                     };
                   }
+
+                  if (!process.env.EXTEND_ESLINT) {
+                    return eslintConfig;
+                  }
+
+                  const extendEslint = process.env.EXTEND_ESLINT.toLowerCase();
+                  const isExtendEslintFalse = !!(extendEslint === 'false' || extendEslint === 'no' || extendEslint === 'n' || extendEslint === '0')
+                  if (isExtendEslintFalse) {
+                    return {
+                      extends: [require.resolve('eslint-config-react-app')],
+                    };
+                  } else {
+                    return eslintConfig;
+                  }
+                  // eumentis-cloud | end
                 })(),
                 ignore: false,
                 useEslintrc: false,
