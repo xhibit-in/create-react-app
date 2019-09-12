@@ -106,7 +106,8 @@ module.exports = function(
       'eslint -c ./.eslintrc --quiet "src/**/*.{js,mjs,jsx,ts,tsx}"',
     'lint-staged': 'lint-staged',
     'git-cz': 'git-cz',
-    ecommit: 'run-s lint-staged git-cz'
+    xcommit: 'run-s lint-staged git-cz',
+    'x-commit': 'xcommit'
     // eumentis-cloud | end
   };
 
@@ -132,7 +133,7 @@ module.exports = function(
   // Commitizen Config
   appPackage.config = {
     commitizen: {
-      path: '@eumentis-cloud/cz-jira',
+      path: '@xhibit/cz-jira',
     }
   };
   // eumentis-cloud | end
@@ -255,7 +256,7 @@ module.exports = function(
     '@hot-loader/react-dom',
     'npm-run-all',
     'commitizen',
-    '@eumentis-cloud/cz-jira',
+    '@xhibit/cz-jira',
     'node-sass',
     'graphql-tag',
     'graphql'
