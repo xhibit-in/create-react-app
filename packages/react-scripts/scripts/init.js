@@ -107,7 +107,7 @@ module.exports = function(
     'lint-staged': 'lint-staged',
     'git-cz': 'git-cz',
     xcommit: 'run-s lint-staged git-cz',
-    'x-commit': 'xcommit'
+    'x-commit': 'run-s lint-staged git-cz'
     // eumentis-cloud | end
   };
 
